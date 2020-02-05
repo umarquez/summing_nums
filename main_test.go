@@ -1,15 +1,14 @@
-package tools_test
+package main
 
 import (
 	"reflect"
-	"summing_nums/tools"
 	"testing"
 )
 
 func TestGetNumbersWhichSums(t *testing.T) {
 	type args struct {
-		options []int
-		total   int
+		digits []int
+		total  int
 	}
 	tests := []struct {
 		name       string
@@ -37,11 +36,8 @@ func TestGetNumbersWhichSums(t *testing.T) {
 			wantResult: nil,
 		},
 		{
-			name: "Big with no solution",
-			args: args{
-				options: []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 70, 100},
-				total:   60,
-			},
+			name:       "Big with no solution",
+			args:       args{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 70, 100}, 60},
 			wantResult: nil,
 		},
 		{
@@ -427,7 +423,7 @@ func TestGetNumbersWhichSums(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if gotResult := tools.GetNumbersWhichSums(tt.args.options, tt.args.total); !reflect.DeepEqual(gotResult, tt.wantResult) {
+			if gotResult := GetNumbersWhichSums(tt.args.digits, tt.args.total); !reflect.DeepEqual(gotResult, tt.wantResult) {
 				t.Errorf("GetNumbersWhichSums() = %v, want %v", gotResult, tt.wantResult)
 			}
 		})
